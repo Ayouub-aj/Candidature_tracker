@@ -227,12 +227,18 @@ DB_TEST_DATABASE=candidature_tracker_test
 DEBUGBAR_ENABLED=true
 ```
 
-### `phpunit.xml` — Test environment
+## 📐 MCD & MLD
 
-```xml
-<env name="DB_DATABASE" value="candidature_tracker_test"/>
-<env name="APP_ENV" value="testing"/>
-```
+### MCD — Conceptual Data Model
+
+![MCD Diagram](./conception/MCD%20candidaturetracker.png)
+
+---
+
+### MLD — Logical Data Model
+
+![MLD Diagram](./conception/MLD%20candidaturetracker.png)
+
 
 ---
 
@@ -517,23 +523,7 @@ class Entretien extends Model {
     }
 }
 ```
-
 ---
-
-## 📐 MCD & MLD
-
-### MCD — Conceptual Data Model
-
-![MCD Diagram](./conception/MCD%20candidaturetracker.png)
-
----
-
-### MLD — Logical Data Model
-
-![MLD Diagram](./conception/MLD%20candidaturetracker.png)
-
----
-
 
 
 ## 🌿 Git Workflow
