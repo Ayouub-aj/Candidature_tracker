@@ -1,6 +1,6 @@
 # 📋 CandidatureTracker
 
- A full-stack web application to track job applications and interviews — built with Laravel 11, Docker Sail, Tailwind CSS v4, and tested with Pest.
+ A full-stack web application to track job applications and interviews — built with Laravel, Docker Sail, Tailwind CSS, and tested with Pest.
 
 ---
 
@@ -524,69 +524,17 @@ class Entretien extends Model {
 
 ### MCD — Conceptual Data Model
 
-```
-┌──────────┐           ┌───────────────────┐           ┌────────────┐
-│   USER   │           │   CANDIDATURE     │           │ ENTRETIEN  │
-├──────────┤           ├───────────────────┤           ├────────────┤
-│ name     │ 1 ──── * │ company           │ 1 ──── * │ type       │
-│ email    │           │ position          │           │ scheduled  │
-│ password │           │ offer_url         │           │ prep_notes │
-└──────────┘           │ status            │           │ result     │
-                       │ priority          │           └────────────┘
-                       │ notes             │
-                       │ applied_at        │
-                       └───────────────────┘
-```
-
-**Entities:** User, Candidature, Entretien
-**Cardinalities:**
-- A User has **1..N** Candidatures (a user can have many candidatures)
-- A Candidature has **0..N** Entretiens (a candidature can have zero or more interviews)
+![MCD Diagram](./conception/MCD%20candidaturetracker.png)
 
 ---
 
 ### MLD — Logical Data Model
 
-```
-users (
-    id              BIGINT UNSIGNED     PK,
-    name            VARCHAR(255)        NOT NULL,
-    email           VARCHAR(255)        NOT NULL UNIQUE,
-    email_verified_at TIMESTAMP         NULL,
-    password        VARCHAR(255)        NOT NULL,
-    remember_token  VARCHAR(100)        NULL,
-    created_at      TIMESTAMP,
-    updated_at      TIMESTAMP
-)
-
-candidatures (
-    id              BIGINT UNSIGNED     PK,
-    user_id         BIGINT UNSIGNED     FK → users.id (CASCADE DELETE),
-    company         VARCHAR(255)        NOT NULL,
-    position        VARCHAR(255)        NOT NULL,
-    offer_url       VARCHAR(255)        NULL,
-    status          ENUM('sent','interview','offer','rejected','withdrawn')  DEFAULT 'sent',
-    priority        ENUM('low','medium','high')                             DEFAULT 'medium',
-    notes           TEXT                NULL,
-    applied_at      DATE                NOT NULL,
-    deleted_at      TIMESTAMP           NULL,
-    created_at      TIMESTAMP,
-    updated_at      TIMESTAMP
-)
-
-entretiens (
-    id                  BIGINT UNSIGNED  PK,
-    candidature_id      BIGINT UNSIGNED  FK → candidatures.id (CASCADE DELETE),
-    type                ENUM('phone','video','onsite','technical','hr')  NOT NULL,
-    scheduled_at        DATETIME         NOT NULL,
-    preparation_notes   TEXT             NULL,
-    result              ENUM('pending','passed','failed')  DEFAULT 'pending',
-    created_at          TIMESTAMP,
-    updated_at          TIMESTAMP
-)
-```
+![MLD Diagram](./conception/MLD%20candidaturetracker.png)
 
 ---
+
+
 
 ## 🌿 Git Workflow
 
